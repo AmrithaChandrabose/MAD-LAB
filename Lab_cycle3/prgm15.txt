@@ -1,0 +1,94 @@
+MainActivity.java
+
+package com.example.alarm_clock;
+import androidx.appcompat.app.AppCompatActivity;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.os.Bundle;
+import android.widget.TextClock;
+import android.widget.TimePicker;
+import java.util.Timer;
+import java.util.TimerTask;
+public class MainActivity extends AppCompatActivity {
+    TimePicker tp;
+    TextClock tc;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        tp = findViewById(R.id.timepicker);
+        tc = findViewById(R.id.textclock);
+        Ringtone r= RingtoneManager.getRingtone(getApplicationContext(),RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        Timer t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if(tc.getText().toString().equals(AlarmTime())){
+                    r.play();
+                }else{
+                    r.stop();
+                }
+            }
+        },0,1000);
+    }
+    public String AlarmTime(){
+        Integer alarmHours = tp.getCurrentHour();
+        Integer alarmMinutes = tp.getCurrentMinute();
+        String stringAlarmMinutes;
+        if(alarmMinutes<10){
+            stringAlarmMinutes="0";
+            stringAlarmMinutes=stringAlarmMinutes.concat(alarmMinutes.toString());
+        }else{
+            stringAlarmMinutes=alarmMinutes.toString();
+        }
+        String stringAlarmTime;
+        if(alarmHours>12){
+            alarmHours=alarmHours-12;
+            stringAlarmTime=alarmHours.toString().concat(":").concat(stringAlarmMinutes).concat("PM");
+        }else {
+            stringAlarmTime=alarmHours.toString().concat(":").concat(stringAlarmMinutes).concat("AM");
+        }
+        return stringAlarmTime;
+    }
+}
+
+
+
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CFECEC"
+    tools:context=".MainActivity">
+
+    <TimePicker
+        android:id="@+id/timepicker"
+        android:layout_width="313dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="295dp"
+        android:layout_marginEnd="53dp"></TimePicker>
+
+    <TextClock
+        android:id="@+id/textclock"
+        android:layout_width="213dp"
+        android:layout_height="132dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="498dp"></TextClock>
+</RelativeLayout>
+
+
+
+
+
+
+
+
+

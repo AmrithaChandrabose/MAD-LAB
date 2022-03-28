@@ -1,0 +1,197 @@
+p5_calculator.java  
+ 
+package com.example.amrithachandrabose;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.view.View;
+public class p5_calculator extends AppCompatActivity {
+    EditText e1, e2;
+    TextView t1;
+    int first, second;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_p5_calculator);
+    }
+    public boolean getNumbers()
+    {
+        e1 = (EditText) findViewById(R.id.first);
+        e2 = (EditText) findViewById(R.id.second);
+        t1 = (TextView) findViewById(R.id.result);
+        String s1 = e1.getText().toString();
+        String s2 = e2.getText().toString();
+        if ((s1.equals(null) && s2.equals(null))
+                || (s1.equals("") && s2.equals(""))) {
+            String result = "NO INPUT";
+            t1.setText(result);
+            return false;
+        } else {
+            // converting string to int.
+            first = Integer.parseInt(s1);
+            // converting string to int.
+            second = Integer.parseInt(s2);
+        }
+        return true;
+    }
+    public void doSum(View v) {
+        if (getNumbers()) {
+            int sum = first + second;
+            t1.setText(Integer.toString(sum));
+        }
+    }
+    public void doSub(View v) {
+        if (getNumbers()) {
+            int sum = first - second;
+            t1.setText(Integer.toString(sum));
+        }
+    }
+    public void doMul(View v) {
+        if (getNumbers()) {
+            int sum = first * second;
+            t1.setText(Integer.toString(sum));
+        }
+    }
+    public void doDiv(View v) {
+        if (getNumbers()) {
+            double sum = first / (second * 1.0);
+            t1.setText(Double.toString(sum));
+        }
+    }
+}
+
+ 
+activity_p5_calculator.xml 
+ 
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".p5_calculator">
+
+    <TextView
+        android:id="@+id/Heading"
+        android:layout_width="337dp"
+        android:layout_height="60dp"
+        android:fontFamily="serif"
+        android:text="CALCULATOR"
+        android:textAlignment="center"
+        android:textColor="#390A5F"
+        android:textSize="45dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <EditText
+        android:id="@+id/first"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Enter Number"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.145"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.267" />
+
+    <EditText
+        android:id="@+id/second"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Enter Number"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.145"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="154dp"
+        android:layout_height="80dp"
+        android:background="#BFC9CA"
+        android:ems="10"
+        android:hint="Result"
+        android:inputType="textPersonName"
+        android:paddingTop="20dp"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.385" />
+
+    <Button
+        android:id="@+id/sum"
+        android:layout_width="78dp"
+        android:layout_height="42dp"
+        android:onClick="doSum"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/div"
+        android:layout_width="78dp"
+        android:layout_height="42dp"
+        android:onClick="doDiv"
+        android:text="/"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.429"
+        tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/sub"
+        android:layout_width="78dp"
+        android:layout_height="42dp"
+        android:onClick="doSub"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.265"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/mul"
+        android:layout_width="78dp"
+        android:layout_height="42dp"
+        android:onClick="doMul"
+        android:text="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.343"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
